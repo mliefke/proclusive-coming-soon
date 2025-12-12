@@ -530,6 +530,29 @@ VARIATION: Lighter charcoal navy + architectural texture
             border-top: none;
         }
 
+        /* Tablet responsiveness */
+        @media (max-width: 1024px) {
+            .header {
+                padding: 35px 40px;
+            }
+
+            .hero {
+                padding: 50px 40px;
+            }
+
+            .hero-title {
+                font-size: clamp(2.6rem, 6vw, 4rem);
+            }
+
+            .teasers {
+                gap: 50px;
+            }
+
+            .footer {
+                padding: 35px 40px;
+            }
+        }
+
         /* Mobile responsiveness */
         @media (max-width: 768px) {
             .header {
@@ -539,36 +562,82 @@ VARIATION: Lighter charcoal navy + architectural texture
             }
 
             .hero {
-                padding: 40px 30px;
+                padding: 40px 24px;
+            }
+
+            .hero-tagline {
+                font-size: 0.7rem;
+                letter-spacing: 0.25em;
+                margin-bottom: 30px;
             }
 
             .hero-title {
-                font-size: 2.4rem;
+                font-size: 2.2rem;
+                margin-bottom: 24px;
             }
 
             .hero-subtitle {
                 font-size: 1rem;
+                margin-bottom: 40px;
+            }
+
+            .waitlist-container {
+                width: 100%;
+                max-width: 100%;
             }
 
             .waitlist-form {
                 flex-direction: column;
             }
 
+            .waitlist-input {
+                padding: 16px 20px;
+                text-align: center;
+            }
+
             .waitlist-btn {
                 padding: 16px 24px;
+            }
+
+            .waitlist-note {
+                font-size: 0.7rem;
+            }
+
+            .success-title {
+                font-size: 1.3rem;
+            }
+
+            .success-text {
+                font-size: 0.85rem;
             }
 
             .teasers {
                 flex-direction: column;
                 gap: 30px;
-                margin-top: 60px;
+                margin-top: 50px;
+            }
+
+            .teaser-value {
+                font-size: 2.2rem;
+            }
+
+            .teaser-label {
+                font-size: 0.65rem;
             }
 
             .footer {
-                padding: 30px;
+                padding: 30px 24px;
                 flex-direction: column;
-                gap: 20px;
+                gap: 15px;
                 text-align: center;
+            }
+
+            .footer-text {
+                font-size: 0.7rem;
+            }
+
+            .footer-link {
+                font-size: 0.7rem;
             }
 
             .corner-accent,
@@ -579,6 +648,25 @@ VARIATION: Lighter charcoal navy + architectural texture
 
             .grid-overlay {
                 opacity: 0.5;
+            }
+        }
+
+        /* Small mobile */
+        @media (max-width: 380px) {
+            .hero {
+                padding: 30px 20px;
+            }
+
+            .hero-title {
+                font-size: 1.9rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .teaser-value {
+                font-size: 2rem;
             }
         }
 
