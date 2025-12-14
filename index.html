@@ -2,16 +2,15 @@
 <html lang="en">
 <!--
 ================================================================================
-PROCLUSIVE COMING SOON SPLASH PAGE v1c
+PROCLUSIVE COMING SOON SPLASH PAGE v1c - EMAIL FIX
 ================================================================================
-Last Updated: December 11, 2025 | Version: 1c
+Last Updated: December 14, 2025 | Version: 1c (email fix)
 Document Type: Pre-Launch Teaser Page
 
-VARIATION: Lighter charcoal navy + architectural texture
-- Background shifted 2 shades lighter from v1a (#1a1d27 base)
-- Includes architectural grid/blueprint texture from v1b
-- Balances sophistication with approachability
-- Better contrast, more visual depth
+FIX APPLIED: Added Formspree email integration for Request Access form
+- Form now submits to hello@proclusive.com via Formspree
+- Replace YOUR_FORMSPREE_ID with actual Formspree form ID after setup
+- Alternative: Use mailto fallback if Formspree not preferred
 ================================================================================
 -->
 <head>
@@ -259,20 +258,44 @@ VARIATION: Lighter charcoal navy + architectural texture
             font-weight: 300;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
 
         .status-indicator {
             width: 6px;
             height: 6px;
-            border-radius: 50%;
             background: var(--accent);
+            border-radius: 50%;
             animation: pulse 2s ease-in-out infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Corner accents */
+        .corner-accent {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            border: 1px solid var(--border-accent);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .corner-accent.top-left {
+            top: 30px;
+            left: 30px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-accent.bottom-right {
+            bottom: 30px;
+            right: 30px;
+            border-left: none;
+            border-top: none;
         }
 
         /* Hero section */
@@ -282,21 +305,9 @@ VARIATION: Lighter charcoal navy + architectural texture
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 80px 60px;
             text-align: center;
-            padding: 60px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero-tagline {
-            font-size: 0.8rem;
-            font-weight: 300;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: fadeUp 1s ease-out 0.3s forwards;
+            animation: fadeUp 1s ease-out 0.3s backwards;
         }
 
         @keyframes fadeUp {
@@ -304,67 +315,69 @@ VARIATION: Lighter charcoal navy + architectural texture
             to { opacity: 1; transform: translateY(0); }
         }
 
+        .hero-tagline {
+            font-size: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
         .hero-title {
             font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(2.8rem, 7vw, 5rem);
+            font-size: 3rem;
             font-weight: 300;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: var(--text-primary);
             margin-bottom: 30px;
-            opacity: 0;
-            animation: fadeUp 1s ease-out 0.5s forwards;
+            max-width: 700px;
         }
 
         .hero-title em {
             font-style: italic;
+            font-weight: 400;
             color: var(--accent);
         }
 
         .hero-subtitle {
             font-size: 1.1rem;
             font-weight: 300;
+            line-height: 1.6;
             color: var(--text-secondary);
-            line-height: 1.7;
-            max-width: 520px;
-            margin-bottom: 60px;
-            opacity: 0;
-            animation: fadeUp 1s ease-out 0.7s forwards;
+            margin-bottom: 50px;
+            max-width: 600px;
         }
 
         /* Waitlist form */
         .waitlist-container {
             width: 100%;
-            max-width: 480px;
-            opacity: 0;
-            animation: fadeUp 1s ease-out 0.9s forwards;
+            max-width: 500px;
+            margin-bottom: 20px;
         }
 
         .waitlist-form {
-            position: relative;
             display: flex;
-            gap: 0;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .waitlist-form:focus-within {
-            border-color: var(--border-accent);
-            box-shadow: 0 0 40px var(--accent-glow);
+            gap: 12px;
+            margin-bottom: 12px;
         }
 
         .waitlist-input {
             flex: 1;
             padding: 18px 24px;
-            background: transparent;
-            border: none;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 300;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 4px;
             color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .waitlist-input:focus {
             outline: none;
+            border-color: var(--accent);
+            background: var(--bg-secondary);
         }
 
         .waitlist-input::placeholder {
@@ -372,48 +385,63 @@ VARIATION: Lighter charcoal navy + architectural texture
         }
 
         .waitlist-btn {
-            padding: 18px 32px;
+            padding: 18px 36px;
             background: var(--accent);
             border: none;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
+            border-radius: 4px;
             color: var(--bg-primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
+            font-family: 'Outfit', sans-serif;
+            white-space: nowrap;
         }
 
         .waitlist-btn:hover {
             background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 16px rgba(201, 169, 98, 0.2);
+        }
+
+        .waitlist-btn:active {
+            transform: translateY(0);
         }
 
         .waitlist-note {
-            margin-top: 16px;
             font-size: 0.75rem;
-            font-weight: 300;
             color: var(--text-muted);
             letter-spacing: 0.05em;
         }
 
-        /* Success state */
+        /* Success message */
         .success-message {
             display: none;
+            opacity: 0;
+            transform: translateY(20px);
             text-align: center;
-            padding: 30px;
+            padding: 40px;
+            max-width: 400px;
         }
 
         .success-message.visible {
             display: block;
-            animation: fadeUp 0.5s ease-out;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .success-icon {
-            width: 48px;
-            height: 48px;
+            width: 60px;
+            height: 60px;
             margin: 0 auto 20px;
-            border: 1px solid var(--accent);
+            background: var(--bg-elevated);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -425,23 +453,22 @@ VARIATION: Lighter charcoal navy + architectural texture
             font-family: 'Cormorant Garamond', Georgia, serif;
             font-size: 1.5rem;
             font-weight: 400;
-            margin-bottom: 10px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
         }
 
         .success-text {
-            font-size: 0.9rem;
-            font-weight: 300;
+            font-size: 0.95rem;
             color: var(--text-secondary);
+            line-height: 1.6;
         }
 
-        /* Teaser hints */
+        /* Teaser stats */
         .teasers {
             display: flex;
-            justify-content: center;
             gap: 60px;
-            margin-top: 80px;
-            opacity: 0;
-            animation: fadeUp 1s ease-out 1.1s forwards;
+            margin-top: 60px;
+            animation: fadeUp 1s ease-out 0.6s backwards;
         }
 
         .teaser-item {
@@ -453,6 +480,7 @@ VARIATION: Lighter charcoal navy + architectural texture
             font-size: 2.5rem;
             font-weight: 300;
             color: var(--accent);
+            margin-bottom: 8px;
             line-height: 1;
         }
 
@@ -462,7 +490,6 @@ VARIATION: Lighter charcoal navy + architectural texture
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--text-muted);
-            margin-top: 8px;
         }
 
         /* Footer */
@@ -472,13 +499,10 @@ VARIATION: Lighter charcoal navy + architectural texture
             justify-content: space-between;
             align-items: center;
             border-top: 1px solid var(--border);
-            opacity: 0;
-            animation: fadeUp 1s ease-out 1.3s forwards;
         }
 
         .footer-text {
             font-size: 0.75rem;
-            font-weight: 300;
             color: var(--text-muted);
             letter-spacing: 0.05em;
         }
@@ -487,70 +511,21 @@ VARIATION: Lighter charcoal navy + architectural texture
             display: flex;
             gap: 30px;
         }
-        
-        .footer-link-email {
-            color: var(--accent);
-        }
 
         .footer-link {
             font-size: 0.75rem;
-            font-weight: 300;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             text-decoration: none;
             letter-spacing: 0.05em;
-            transition: color 0.3s ease;
+            transition: color 0.2s;
         }
 
         .footer-link:hover {
             color: var(--accent);
         }
 
-        /* Decorative corner brackets */
-        .corner-accent {
-            position: fixed;
-            width: 120px;
-            height: 120px;
-            border: 1px solid var(--border);
-            opacity: 0.4;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .corner-accent.top-left {
-            top: 20px;
-            left: 20px;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        .corner-accent.bottom-right {
-            bottom: 20px;
-            right: 20px;
-            border-left: none;
-            border-top: none;
-        }
-
-        /* Tablet responsiveness */
-        @media (max-width: 1024px) {
-            .header {
-                padding: 35px 40px;
-            }
-
-            .hero {
-                padding: 50px 40px;
-            }
-
-            .hero-title {
-                font-size: clamp(2.6rem, 6vw, 4rem);
-            }
-
-            .teasers {
-                gap: 50px;
-            }
-
-            .footer {
-                padding: 35px 40px;
-            }
+        .footer-link-email {
+            font-family: 'Courier New', monospace;
         }
 
         /* Mobile responsiveness */
@@ -726,20 +701,24 @@ VARIATION: Lighter charcoal navy + architectural texture
             </h1>
             
             <p class="hero-subtitle">
-                A private network for the built environment. Verified professionals. 
+                An exclusive network for the built environment. Verified professionals. 
                 Curated referrals. Fifty founding seats.
             </p>
 
             <!-- Waitlist -->
             <div class="waitlist-container" id="waitlist-container">
-                <form class="waitlist-form" id="waitlist-form">
+                <!-- FORMSPREE VERSION - CONFIGURED -->
+                <form class="waitlist-form" id="waitlist-form" action="https://formspree.io/f/myzrbdnr" method="POST">
                     <input 
                         type="email" 
+                        name="email"
                         class="waitlist-input" 
                         placeholder="Enter your email"
                         required
                         aria-label="Email address"
                     >
+                    <input type="hidden" name="_subject" value="New Founding Member Request - Proclusive">
+                    <input type="hidden" name="_next" value="https://www.proclusive.com?success=true">
                     <button type="submit" class="waitlist-btn">Request Access</button>
                 </form>
                 <p class="waitlist-note">Limited to 50 founding members · DC Metro professionals</p>
@@ -777,37 +756,19 @@ VARIATION: Lighter charcoal navy + architectural texture
         <footer class="footer">
             <p class="footer-text">© 2025 Chalo Enterprises LLC</p>
             <div class="footer-links">
-                <a href="mailto:hello@proclusive.com?subject=Knock%20Knock" class="footer-link footer-link-email">hello@proclusive.com</a>
+                <a href="/cdn-cgi/l/email-protection#e088858c8c8fa090928f838c9593899685ce838f8ddf9395828a858394ddab8e8f838bc5d2d0ab8e8f838b" class="footer-link footer-link-email"><span class="__cf_email__" data-cfemail="85ede0e9e9eac5f5f7eae6e9f0f6ecf3e0abe6eae8">[email&#160;protected]</span></a>
             </div>
         </footer>
     </main>
 
-    <script>
-        // Form submission handler
-        document.getElementById('waitlist-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const container = document.getElementById('waitlist-container');
-            const success = document.getElementById('success-message');
-            
-            container.style.opacity = '0';
-            container.style.transform = 'translateY(-10px)';
-            container.style.transition = 'all 0.3s ease';
-            
-            setTimeout(() => {
-                container.style.display = 'none';
-                success.classList.add('visible');
-            }, 300);
-        });
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Check for success parameter in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            document.getElementById('waitlist-container').style.display = 'none';
+            document.getElementById('success-message').classList.add('visible');
+        }
 
         // Subtle parallax on mouse move
         document.addEventListener('mousemove', function(e) {
-            const gradient = document.querySelector('.bg-gradient');
-            const x = (e.clientX / window.innerWidth - 0.5) * 20;
-            const y = (e.clientY / window.innerHeight - 0.5) * 20;
-            
-            gradient.style.transform = `translate(${x}px, ${y}px)`;
-        });
-    </script>
-</body>
-</html>
+            const gradient = document.querySelector('.bg-g
