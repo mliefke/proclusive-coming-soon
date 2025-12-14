@@ -2,15 +2,14 @@
 <html lang="en">
 <!--
 ================================================================================
-PROCLUSIVE COMING SOON SPLASH PAGE v1c - EMAIL FIX
+PROCLUSIVE COMING SOON SPLASH PAGE v1d
 ================================================================================
-Last Updated: December 14, 2025 | Version: 1c (email fix)
+Last Updated: December 14, 2025 | Version: 1d
 Document Type: Pre-Launch Teaser Page
 
-FIX APPLIED: Added Formspree email integration for Request Access form
-- Form now submits to hello@proclusive.com via Formspree
-- Replace YOUR_FORMSPREE_ID with actual Formspree form ID after setup
-- Alternative: Use mailto fallback if Formspree not preferred
+CHANGES FROM v1c:
+- Changed "A private network" to "An exclusive network"
+- Fixed truncated JavaScript at end of file
 ================================================================================
 -->
 <head>
@@ -756,19 +755,30 @@ FIX APPLIED: Added Formspree email integration for Request Access form
         <footer class="footer">
             <p class="footer-text">© 2025 Chalo Enterprises LLC</p>
             <div class="footer-links">
-                <a href="/cdn-cgi/l/email-protection#e088858c8c8fa090928f838c9593899685ce838f8ddf9395828a858394ddab8e8f838bc5d2d0ab8e8f838b" class="footer-link footer-link-email"><span class="__cf_email__" data-cfemail="85ede0e9e9eac5f5f7eae6e9f0f6ecf3e0abe6eae8">[email&#160;protected]</span></a>
+                <a href="mailto:hello@proclusive.com?subject=Knock%20Knock" class="footer-link footer-link-email">hello@proclusive.com</a>
             </div>
         </footer>
     </main>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Check for success parameter in URL
+    <script>
+        // Check for success parameter in URL (handles Formspree redirect)
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('success') === 'true') {
             document.getElementById('waitlist-container').style.display = 'none';
             document.getElementById('success-message').classList.add('visible');
+            // Clean URL without reload
+            window.history.replaceState({}, document.title, window.location.pathname);
         }
 
-        // Subtle parallax on mouse move
-        document.addEventListener('mousemove', function(e) {
-            const gradient = document.querySelector('.bg-g
+        // Subtle parallax on mouse move (desktop only)
+        if (window.matchMedia('(min-width: 768px)').matches) {
+            document.addEventListener('mousemove', function(e) {
+                const gradient = document.querySelector('.bg-gradient');
+                const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+                const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+                gradient.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        }
+    </script>
+</body>
+</html>
