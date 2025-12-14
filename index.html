@@ -2,14 +2,17 @@
 <html lang="en">
 <!--
 ================================================================================
-PROCLUSIVE COMING SOON SPLASH PAGE v1d
+PROCLUSIVE COMING SOON SPLASH PAGE v1e
 ================================================================================
-Last Updated: December 14, 2025 | Version: 1d
+Last Updated: December 14, 2025 | Version: 1e
 Document Type: Pre-Launch Teaser Page
 
-CHANGES FROM v1c:
-- Changed "A private network" to "An exclusive network"
-- Fixed truncated JavaScript at end of file
+CHANGES FROM v1d:
+- Removed Formspree integration
+- "Request Access" → "Request an Invitation" button with mailto:hello@proclusive.com?subject=Knock%20Knock
+- Removed email input field (user's email comes from their mail client)
+- Footer email link uses subject=Hello
+- Removed success message (mail client opens instead)
 ================================================================================
 -->
 <head>
@@ -348,118 +351,42 @@ CHANGES FROM v1c:
             max-width: 600px;
         }
 
-        /* Waitlist form */
-        .waitlist-container {
-            width: 100%;
-            max-width: 500px;
+        /* CTA Button */
+        .cta-container {
             margin-bottom: 20px;
         }
 
-        .waitlist-form {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .waitlist-input {
-            flex: 1;
-            padding: 18px 24px;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            font-family: 'Outfit', sans-serif;
-            transition: all 0.2s;
-        }
-
-        .waitlist-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: var(--bg-secondary);
-        }
-
-        .waitlist-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .waitlist-btn {
-            padding: 18px 36px;
+        .cta-btn {
+            display: inline-block;
+            padding: 18px 48px;
             background: var(--accent);
             border: none;
             border-radius: 4px;
             color: var(--bg-primary);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
             letter-spacing: 0.05em;
             cursor: pointer;
             transition: all 0.2s;
             font-family: 'Outfit', sans-serif;
-            white-space: nowrap;
+            text-decoration: none;
         }
 
-        .waitlist-btn:hover {
+        .cta-btn:hover {
             background: var(--accent-hover);
             transform: translateY(-1px);
             box-shadow: 0 8px 16px rgba(201, 169, 98, 0.2);
         }
 
-        .waitlist-btn:active {
+        .cta-btn:active {
             transform: translateY(0);
         }
 
-        .waitlist-note {
+        .cta-note {
             font-size: 0.75rem;
             color: var(--text-muted);
             letter-spacing: 0.05em;
-        }
-
-        /* Success message */
-        .success-message {
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            text-align: center;
-            padding: 40px;
-            max-width: 400px;
-        }
-
-        .success-message.visible {
-            display: block;
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .success-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 20px;
-            background: var(--bg-elevated);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-        }
-
-        .success-title {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--text-primary);
-            margin-bottom: 12px;
-        }
-
-        .success-text {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
+            margin-top: 16px;
         }
 
         /* Teaser stats */
@@ -555,34 +482,13 @@ CHANGES FROM v1c:
                 margin-bottom: 40px;
             }
 
-            .waitlist-container {
-                width: 100%;
-                max-width: 100%;
+            .cta-btn {
+                padding: 16px 40px;
+                font-size: 0.9rem;
             }
 
-            .waitlist-form {
-                flex-direction: column;
-            }
-
-            .waitlist-input {
-                padding: 16px 20px;
-                text-align: center;
-            }
-
-            .waitlist-btn {
-                padding: 16px 24px;
-            }
-
-            .waitlist-note {
+            .cta-note {
                 font-size: 0.7rem;
-            }
-
-            .success-title {
-                font-size: 1.3rem;
-            }
-
-            .success-text {
-                font-size: 0.85rem;
             }
 
             .teasers {
@@ -637,6 +543,10 @@ CHANGES FROM v1c:
 
             .hero-subtitle {
                 font-size: 0.95rem;
+            }
+
+            .cta-btn {
+                padding: 14px 32px;
             }
 
             .teaser-value {
@@ -704,34 +614,10 @@ CHANGES FROM v1c:
                 Curated referrals. Fifty founding seats.
             </p>
 
-            <!-- Waitlist -->
-            <div class="waitlist-container" id="waitlist-container">
-                <!-- FORMSPREE VERSION - CONFIGURED -->
-                <form class="waitlist-form" id="waitlist-form" action="https://formspree.io/f/myzrbdnr" method="POST">
-                    <input 
-                        type="email" 
-                        name="email"
-                        class="waitlist-input" 
-                        placeholder="Enter your email"
-                        required
-                        aria-label="Email address"
-                    >
-                    <input type="hidden" name="_subject" value="New Founding Member Request - Proclusive">
-                    <input type="hidden" name="_next" value="https://www.proclusive.com?success=true">
-                    <button type="submit" class="waitlist-btn">Request an Invitation</button>
-                </form>
-                <p class="waitlist-note">Limited to 50 founding members · DC Metro professionals</p>
-            </div>
-
-            <!-- Success message -->
-            <div class="success-message" id="success-message">
-                <div class="success-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M20 6L9 17l-5-5"/>
-                    </svg>
-                </div>
-                <h3 class="success-title">Request received</h3>
-                <p class="success-text">We review each application personally and will be in touch.</p>
+            <!-- CTA -->
+            <div class="cta-container">
+                <a href="mailto:hello@proclusive.com?subject=Knock%20Knock" class="cta-btn">Request an Invitation</a>
+                <p class="cta-note">Limited to 50 founding members · DC Metro professionals</p>
             </div>
 
             <!-- Teaser stats -->
@@ -755,21 +641,12 @@ CHANGES FROM v1c:
         <footer class="footer">
             <p class="footer-text">© 2025 Chalo Enterprises LLC</p>
             <div class="footer-links">
-                <a href="mailto:hello@proclusive.com?subject=Knock%20Knock" class="footer-link footer-link-email">hello@proclusive.com</a>
+                <a href="mailto:hello@proclusive.com?subject=Hello" class="footer-link footer-link-email">hello@proclusive.com</a>
             </div>
         </footer>
     </main>
 
     <script>
-        // Check for success parameter in URL (handles Formspree redirect)
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('success') === 'true') {
-            document.getElementById('waitlist-container').style.display = 'none';
-            document.getElementById('success-message').classList.add('visible');
-            // Clean URL without reload
-            window.history.replaceState({}, document.title, window.location.pathname);
-        }
-
         // Subtle parallax on mouse move (desktop only)
         if (window.matchMedia('(min-width: 768px)').matches) {
             document.addEventListener('mousemove', function(e) {
