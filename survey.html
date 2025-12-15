@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+================================================================================
+PROCLUSIVE FEEDBACK SURVEY PAGE v1
+================================================================================
+Last Updated: December 14, 2025 | Version: 1
+Document Type: Feedback Survey
+Formspree Endpoint: myzrbdnr → survey@proclusive.com
+================================================================================
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proclusive | Share Your Feedback</title>
+    <meta name="description" content="Help shape the future of Proclusive. Share your feedback on our platform, business model, and MVP.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #1a1d27;
+            --bg-secondary: #21242f;
+            --bg-tertiary: #282c38;
+            --bg-elevated: #2f3442;
+            --text-primary: #f8f8fa;
+            --text-secondary: #b0b2bc;
+            --text-muted: #6a6d78;
+            --accent: #c9a962;
+            --accent-hover: #dfc07a;
+            --accent-glow: rgba(201, 169, 98, 0.12);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(201, 169, 98, 0.25);
+            --grid-color: rgba(201, 169, 98, 0.045);
+            --error: #e57373;
+            --success: #81c784;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Animated background */
+        .bg-atmosphere {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-gradient {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(201, 169, 98, 0.045) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(201, 169, 98, 0.035) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(40, 45, 60, 0.6) 0%, transparent 70%);
+            animation: atmosphereShift 30s ease-in-out infinite;
+        }
+
+        @keyframes atmosphereShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-2%, 1%) rotate(1deg); }
+            66% { transform: translate(1%, -2%) rotate(-1deg); }
+        }
+
+        /* Architectural grid pattern */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 1;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(rgba(201, 169, 98, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201, 169, 98, 0.025) 1px, transparent 1px);
+            background-size: 
+                100px 100px,
+                100px 100px,
+                20px 20px,
+                20px 20px;
+            background-position: center center;
+            mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+        }
+
+        /* Noise texture */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Main container */
+        .main {
+            position: relative;
+            z-index: 3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            padding: 40px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeDown 1s ease-out;
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--accent);
+        }
+
+        .header-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* Survey section */
+        .survey-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 24px 80px;
+            animation: fadeUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .survey-intro {
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 50px;
+        }
+
+        .survey-tagline {
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .survey-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .survey-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .survey-subtitle {
+            font-size: 1.05rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        /* Form container */
+        .survey-container {
+            width: 100%;
+            max-width: 680px;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 50px;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        }
+
+        .survey-form {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+        /* Form groups */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+        }
+
+        .form-label .required {
+            color: var(--accent);
+            margin-left: 4px;
+        }
+
+        .form-sublabel {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-top: -5px;
+        }
+
+        /* Input styles */
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 16px 20px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--border-accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .form-select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236a6d78' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 45px;
+        }
+
+        .form-select option {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        /* Rating scale */
+        .rating-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rating-scale {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .rating-option {
+            position: relative;
+        }
+
+        .rating-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .rating-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .rating-option input:checked + .rating-label {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .rating-option:hover .rating-label {
+            border-color: var(--border-accent);
+        }
+
+        .rating-hints {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            padding: 0 4px;
+        }
+
+        /* Checkbox group */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .checkbox-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-custom {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            margin-top: 1px;
+        }
+
+        .checkbox-custom svg {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-option input:checked + .checkbox-custom {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .checkbox-option input:checked + .checkbox-custom svg {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .checkbox-option:hover .checkbox-custom {
+            border-color: var(--border-accent);
+        }
+
+        .checkbox-text {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Divider */
+        .form-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-accent), transparent);
+            margin: 10px 0;
+        }
+
+        /* Section titles within form */
+        .form-section-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        /* Submit button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px 32px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            border: none;
+            border-radius: 8px;
+            color: var(--bg-primary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 169, 98, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* Success message */
+        .success-container {
+            display: none;
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .success-container.visible {
+            display: block;
+            animation: fadeUp 0.5s ease-out;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: scaleIn 0.5s ease-out 0.2s both;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            color: var(--bg-primary);
+        }
+
+        .success-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .success-text {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-hover);
+            gap: 12px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-text {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: var(--text-muted);
+        }
+
+        .footer-link {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent);
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .header {
+                padding: 30px 24px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .survey-section {
+                padding: 20px 20px 60px;
+            }
+
+            .survey-title {
+                font-size: 2rem;
+            }
+
+            .survey-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .survey-container {
+                padding: 30px 24px;
+                border-radius: 12px;
+            }
+
+            .survey-form {
+                gap: 28px;
+            }
+
+            .rating-scale {
+                gap: 8px;
+            }
+
+            .rating-label {
+                width: 42px;
+                height: 42px;
+                font-size: 0.85rem;
+            }
+
+            .footer {
+                padding: 24px;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .grid-overlay {
+                opacity: 0.5;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .survey-title {
+                font-size: 1.7rem;
+            }
+
+            .survey-container {
+                padding: 24px 20px;
+            }
+
+            .rating-label {
+                width: 38px;
+                height: 38px;
+                font-size: 0.8rem;
+            }
+
+            .form-input,
+            .form-textarea,
+            .form-select {
+                padding: 14px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Loading state */
+        .submit-btn.loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .submit-btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -10px;
+            border: 2px solid var(--bg-primary);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Atmospheric background -->
+    <div class="bg-atmosphere">
+        <div class="bg-gradient"></div>
+    </div>
+    
+    <!-- Architectural grid pattern -->
+    <div class="grid-overlay"></div>
+    
+    <div class="noise-overlay"></div>
+
+    <!-- Main content -->
+    <main class="main">
+        <!-- Header -->
+        <header class="header">
+            <a href="/" class="logo">Proclusive</a>
+            <div class="header-status">
+                <span>Feedback Survey</span>
+            </div>
+        </header>
+
+        <!-- Survey Section -->
+        <section class="survey-section">
+            <div class="survey-intro">
+                <p class="survey-tagline">Help Shape the Future</p>
+                <h1 class="survey-title">Your <em>insight</em> matters</h1>
+                <p class="survey-subtitle">
+                    We're building something different for the built environment. 
+                    Your candid feedback on our setup, execution, and business model 
+                    will help us get it right.
+                </p>
+            </div>
+
+            <div class="survey-container">
+                <!-- Survey Form -->
+                <form class="survey-form" id="survey-form" action="https://formspree.io/f/myzrbdnr" method="POST">
+                    <!-- Hidden field for form identification -->
+                    <input type="hidden" name="_subject" value="Proclusive Feedback Survey Response">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <!-- Section: About You -->
+                    <div class="form-group">
+                        <span class="form-section-title">About You</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Your Name
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" name="name" class="form-input" placeholder="Full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Email Address
+                            <span class="required">*</span>
+                        </label>
+                        <input type="email" name="email" class="form-input" placeholder="you@company.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Your Role in the Industry</label>
+                        <select name="role" class="form-select">
+                            <option value="" disabled selected>Select your primary role</option>
+                            <option value="General Contractor">General Contractor</option>
+                            <option value="Specialty Contractor">Specialty Contractor</option>
+                            <option value="Architect">Architect</option>
+                            <option value="Interior Designer">Interior Designer</option>
+                            <option value="Developer/Owner">Developer / Owner</option>
+                            <option value="Engineer">Engineer</option>
+                            <option value="Supplier/Vendor">Supplier / Vendor</option>
+                            <option value="Consultant">Consultant</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-divider"></div>
+
+                    <!-- Section: Concept & Value Proposition -->
+                    <div class="form-group">
+                        <span class="form-section-title">Concept & Value</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            How compelling is Proclusive's core concept?
+                            <span class="required">*</span>
+                        </label>
+                        <p class="form-sublabel">A trusted referral network with Vetting-as-a-Service™ for construction professionals</p>
+                        <div class="rating-group">
+                            <div class="rating-scale">
+                                <label class="rating-option">
+                                    <input type="radio" name="concept_rating" value="1" required>
+                                    <span class="rating-label">1</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="concept_rating" value="2">
+                                    <span class="rating-label">2</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="concept_rating" value="3">
+                                    <span class="rating-label">3</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="concept_rating" value="4">
+                                    <span class="rating-label">4</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="concept_rating" value="5">
+                                    <span class="rating-label">5</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="concept_rating" value="6">
+                                    <span class="rating-label">6</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="concept_rating" value="7">
+                                    <span class="rating-label">7</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="concept_rating" value="8">
+                                    <span class="rating-label">8</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="concept_rating" value="9">
+                                    <span class="rating-label">9</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="concept_rating" value="10">
+                                    <span class="rating-label">10</span>
+                                </label>
+                            </div>
+                            <div class="rating-hints">
+                                <span>Not compelling</span>
+                                <span>Extremely compelling</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">What aspects of Proclusive appeal to you most?</label>
+                        <p class="form-sublabel">Select all that apply</p>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="appeal[]" value="Vetted professionals">
+                                <span class="checkbox-custom">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <path d="M20 6L9 17l-5-5"/>
+                                    </svg>
+                                </span>
+                                <span class="checkbox-text">Access to vetted, verified professionals</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="appeal[]" value="Quality referrals">
+                                <span class="checkbox-custom">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <path d="M20 6L9 17l-5-5"/>
+                                    </svg>
+                                </span>
+                                <span class="checkbox-text">Higher quality referrals vs. cold leads</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="appeal[]" value="Exclusive network">
+                                <span class="checkbox-custom">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <path d="M20 6L9 17l-5-5"/>
+                                    </svg>
+                                </span>
+                                <span class="checkbox-text">Exclusive, curated membership</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="appeal[]" value="Commission structure">
+                                <span class="checkbox-custom">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <path d="M20 6L9 17l-5-5"/>
+                                    </svg>
+                                </span>
+                                <span class="checkbox-text">Referral commission structure</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="appeal[]" value="Trust infrastructure">
+                                <span class="checkbox-custom">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <path d="M20 6L9 17l-5-5"/>
+                                    </svg>
+                                </span>
+                                <span class="checkbox-text">Building trust infrastructure for the industry</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="appeal[]" value="Peer community">
+                                <span class="checkbox-custom">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <path d="M20 6L9 17l-5-5"/>
+                                    </svg>
+                                </span>
+                                <span class="checkbox-text">Community of like-minded professionals</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-divider"></div>
+
+                    <!-- Section: Business Model -->
+                    <div class="form-group">
+                        <span class="form-section-title">Business Model</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            How viable does the business model seem?
+                            <span class="required">*</span>
+                        </label>
+                        <p class="form-sublabel">Membership fees + referral commissions on closed projects</p>
+                        <div class="rating-group">
+                            <div class="rating-scale">
+                                <label class="rating-option">
+                                    <input type="radio" name="model_rating" value="1" required>
+                                    <span class="rating-label">1</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="model_rating" value="2">
+                                    <span class="rating-label">2</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="model_rating" value="3">
+                                    <span class="rating-label">3</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="model_rating" value="4">
+                                    <span class="rating-label">4</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="model_rating" value="5">
+                                    <span class="rating-label">5</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="model_rating" value="6">
+                                    <span class="rating-label">6</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="model_rating" value="7">
+                                    <span class="rating-label">7</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="model_rating" value="8">
+                                    <span class="rating-label">8</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="model_rating" value="9">
+                                    <span class="rating-label">9</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="model_rating" value="10">
+                                    <span class="rating-label">10</span>
+                                </label>
+                            </div>
+                            <div class="rating-hints">
+                                <span>Not viable</span>
+                                <span>Highly viable</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Would you pay for a membership like this?</label>
+                        <select name="willingness_to_pay" class="form-select">
+                            <option value="" disabled selected>Select one</option>
+                            <option value="Yes, definitely">Yes, definitely</option>
+                            <option value="Probably yes">Probably, if the value is clear</option>
+                            <option value="Maybe">Maybe, I'd need to see it in action</option>
+                            <option value="Probably not">Probably not</option>
+                            <option value="No">No, I wouldn't pay for this</option>
+                        </select>
+                    </div>
+
+                    <div class="form-divider"></div>
+
+                    <!-- Section: Execution & MVP -->
+                    <div class="form-group">
+                        <span class="form-section-title">Execution & MVP</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">What concerns do you have, if any?</label>
+                        <textarea name="concerns" class="form-textarea" placeholder="Share any concerns about the concept, execution, market fit, competition, timing, etc."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">What would make Proclusive a "must-have" for you?</label>
+                        <textarea name="must_have" class="form-textarea" placeholder="What features, guarantees, or proof points would make you eager to join?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            How likely are you to recommend Proclusive to a peer?
+                            <span class="required">*</span>
+                        </label>
+                        <div class="rating-group">
+                            <div class="rating-scale">
+                                <label class="rating-option">
+                                    <input type="radio" name="nps" value="0" required>
+                                    <span class="rating-label">0</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="nps" value="1">
+                                    <span class="rating-label">1</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="nps" value="2">
+                                    <span class="rating-label">2</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="nps" value="3">
+                                    <span class="rating-label">3</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="nps" value="4">
+                                    <span class="rating-label">4</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="nps" value="5">
+                                    <span class="rating-label">5</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="nps" value="6">
+                                    <span class="rating-label">6</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="nps" value="7">
+                                    <span class="rating-label">7</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="nps" value="8">
+                                    <span class="rating-label">8</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="nps" value="9">
+                                    <span class="rating-label">9</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="nps" value="10">
+                                    <span class="rating-label">10</span>
+                                </label>
+                            </div>
+                            <div class="rating-hints">
+                                <span>Not at all likely</span>
+                                <span>Extremely likely</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-divider"></div>
+
+                    <!-- Section: Final Thoughts -->
+                    <div class="form-group">
+                        <span class="form-section-title">Final Thoughts</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Any other feedback or suggestions?</label>
+                        <textarea name="additional_feedback" class="form-textarea" placeholder="We value candid feedback—positive or critical. What else should we know?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Would you be open to a brief follow-up conversation?</label>
+                        <select name="follow_up" class="form-select">
+                            <option value="" disabled selected>Select one</option>
+                            <option value="Yes, anytime">Yes, happy to chat anytime</option>
+                            <option value="Yes, briefly">Yes, but keep it brief (15 min)</option>
+                            <option value="Maybe">Maybe, reach out and I'll see</option>
+                            <option value="No">No, prefer not to</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submit-btn">Submit Feedback</button>
+                    <p class="form-note">Your responses are confidential and will only be used to improve Proclusive.</p>
+                </form>
+
+                <!-- Success Message -->
+                <div class="success-container" id="success-container">
+                    <div class="success-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                    </div>
+                    <h2 class="success-title">Thank you</h2>
+                    <p class="success-text">
+                        Your feedback has been received and will directly inform 
+                        how we build Proclusive. We truly appreciate your time and insight.
+                    </p>
+                    <a href="/" class="back-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Return to Proclusive
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">© 2025 Chalo Enterprises LLC</p>
+            <a href="mailto:michelle@proclusive.com" class="footer-link">michelle@proclusive.com</a>
+        </footer>
+    </main>
+
+    <script>
+        // Form submission handler with Formspree
+        const form = document.getElementById('survey-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const successContainer = document.getElementById('success-container');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Add loading state
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+
+            try {
+                const formData = new FormData(form);
+                
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Hide form, show success
+                    form.style.display = 'none';
+                    successContainer.classList.add('visible');
+                    
+                    // Scroll to top of container
+                    document.querySelector('.survey-container').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                // Remove loading state
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                
+                alert('There was an issue submitting your feedback. Please try again or email us directly at michelle@proclusive.com');
+            }
+        });
+
+        // Subtle parallax on mouse move
+        document.addEventListener('mousemove', function(e) {
+            const gradient = document.querySelector('.bg-gradient');
+            if (gradient) {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                gradient.style.transform = `translate(${x}px, ${y}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
